@@ -31,4 +31,5 @@ jobs:
       - name: Run main.py
         env:
           WECHAT_WEBHOOK: ${{ secrets.WECHAT_WEBHOOK }}
+          Zaobao_token: ${{ secrets.Zaobao_token }}
         run: python main.py
