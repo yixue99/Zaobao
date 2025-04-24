@@ -1,0 +1,34 @@
+name: Send image to WeChat
+
+on:
+  schedule:
+    - cron: '* 11 * * *'
+  workflow_dispatch:
+  
+permissions:
+  actions: write  # 允许执行 Actions
+  contents: read  # 仅读仓库内容（避免误修改）
+  pull-requests: write  # 若需自动创建 PR
+
+jobs:
+  send-image:
+    runs-on: ubuntu-latest
+    env:
+          TZ: Asia/Shanghai
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run main.py
+        env:
+          WECHAT_WEBHOOK: ${{ secrets.WECHAT_WEBHOOK }}
+        run: python main.py
