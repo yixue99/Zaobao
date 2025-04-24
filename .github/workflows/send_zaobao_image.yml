@@ -2,7 +2,7 @@ name: Send zaobao_image to WeChat
 
 on:
   schedule:
-    - cron: '* 22 * * *'
+    - cron: '10 00 * * *'
   workflow_dispatch:
   
 permissions:
