@@ -6,8 +6,9 @@ import os
 from datetime import datetime
 
 def get_image_url():
+    token = os.getenv("Zaobao_token")
     url = "https://v3.alapi.cn/api/zaobao"
-    querystring = {"token": "2iFnEYuZqAtfkwhX", "format": "json"}
+    querystring = {"token": token, "format": "json"}
     headers = {"Content-Type": "application/json"}
 
     response = requests.get(url, headers=headers, params=querystring, timeout=10)
