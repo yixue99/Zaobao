@@ -4,6 +4,7 @@ import base64
 import hashlib
 import os
 from datetime import datetime
+import certifi
 
 def get_image_url():
     token = os.getenv("Zaobao_token")
@@ -11,7 +12,7 @@ def get_image_url():
     querystring = {"token": token, "format": "json"}
     headers = {"Content-Type": "application/json"}
 
-    response = requests.get(url, headers=headers, params=querystring, timeout=10)
+    response = requests.get(url, headers=headers, params=querystring, timeout=10, verify=certifi.where())
     image_url = response.json()['data']['image']
     return image_url
 
