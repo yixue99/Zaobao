@@ -12,12 +12,12 @@ def get_image_url():
     querystring = {"token": token, "format": "json"}
     headers = {"Content-Type": "application/json"}
 
-    response = requests.get(url, headers=headers, params=querystring, timeout=10, verify=certifi.where())
+    response = requests.get(url, headers=headers, params=querystring, timeout=10)
     image_url = response.json()['data']['image']
     return image_url
 
 def get_base64_and_md5(image_url):
-    img_data = requests.get(image_url, timeout=10).content
+    img_data = requests.get(image_url, timeout=10, verify=certifi.where()).content
     b64_data = base64.b64encode(img_data).decode()
     md5_val = hashlib.md5(img_data).hexdigest()
     return b64_data, md5_val
