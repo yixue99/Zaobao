@@ -4,7 +4,6 @@ import base64
 import hashlib
 import os
 from datetime import datetime
-import certifi
 
 def get_image_url():
     token = os.getenv("Zaobao_token")
@@ -17,7 +16,7 @@ def get_image_url():
     return image_url
 
 def get_base64_and_md5(image_url):
-    img_data = requests.get(image_url, timeout=10, verify=certifi.where()).content
+    img_data = requests.get(image_url, timeout=10, verify=False).content
     b64_data = base64.b64encode(img_data).decode()
     md5_val = hashlib.md5(img_data).hexdigest()
     return b64_data, md5_val
